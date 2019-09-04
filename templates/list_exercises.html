@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    {% for exercise in exercises %}
+        <h2>{{ exercise.name }}</h2>
+        {{ exercise.description }}<br>
+        {{ exercise.reps }}
+    {% endfor %}
+    <br><br>
+    <a href="/add_exercise">Add exercise</a>
+</body>
+</html>

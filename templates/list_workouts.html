@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+        {% for workout in workouts %}
+        <h2>{{ workout.name }}</h2>
+        {{ workout.description }}<br>
+        <ul>
+            {% for split in workout.splits.all %}
+                <li>{{ split.name }}</li>
+            {% endfor %}
+        </ul>
+    {% endfor %}
+    <br>
+    <a href="/add_workout">Add workout</a>
+</body>
+</html>
