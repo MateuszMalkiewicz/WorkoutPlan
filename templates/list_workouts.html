@@ -5,7 +5,8 @@
     <title>Title</title>
 </head>
 <body>
-        {% for workout in workouts %}
+<a href="/">Strona główna</a>
+    {% for workout in workouts %}
         <h2>{{ workout.name }}</h2>
         {{ workout.description }}<br>
         <ul>
@@ -13,8 +14,9 @@
                 <li>{{ split.name }}</li>
             {% endfor %}
         </ul>
+        <a href="/workout/{{ workout.id }}">Edit</a>
     {% endfor %}
-    <br>
+    <br><br>
     <a href="/add_workout">Add workout</a>
 </body>
 </html>

@@ -5,10 +5,12 @@
     <title>Title</title>
 </head>
 <body>
+    <a href="/">Strona główna</a>
     {% for exercise in exercises %}
         <h2>{{ exercise.name }}</h2>
         {{ exercise.description }}<br>
-        {{ exercise.reps }}
+        {{ exercise.reps }}<br>
+        <a href="/exercise/{{ exercise.id }}">Edit/Delete</a>
     {% endfor %}
     <br><br>
     <a href="/add_exercise">Add exercise</a>

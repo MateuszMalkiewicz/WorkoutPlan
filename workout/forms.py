@@ -26,3 +26,5 @@ class AddWorkoutForm(forms.ModelForm):
     class Meta:
         model = WorkoutModel
         fields = '__all__'
+
+

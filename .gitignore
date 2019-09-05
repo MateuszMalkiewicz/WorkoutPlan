@@ -128,4 +128,7 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+# My excludes
+dzialko.html
+
 # End of https://www.gitignore.io/api/python
