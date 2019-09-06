@@ -57,6 +57,18 @@ class EditExerciseView(View):
             return render(request, 'edit_exercise.html', {'form': form})
 
 
+class DeleteExerciseView(View):
+    def get(self, request, exercise_id):
+        exercise = ExerciseModel.objects.get(id=exercise_id)
+        context = {'type': 'exercise', 'object': exercise}
+        return render(request, 'delete.html', context)
+
+    def post(self, request, exercise_id):
+        exercise = ExerciseModel.objects.get(id=exercise_id)
+        exercise.delete()
+        return HttpResponseRedirect(f'/exercises')
+
+
 class AddSplitView(View):
     def get(self, request):
         form = AddSplitForm()
@@ -89,6 +101,18 @@ class EditSplitView(View):
             return render(request, 'edit_split.html', {'form': form})
 
 
+class DeleteSplitView(View):
+    def get(self, request, split_id):
+        split = SplitModel.objects.get(id=split_id)
+        context = {'type': 'split', 'object': split}
+        return render(request, 'delete.html', context)
+
+    def post(self, request, split_id):
+        split = SplitModel.objects.get(id=split_id)
+        split.delete()
+        return HttpResponseRedirect(f'/splits')
+
+
 class AddWorkoutView(View):
     def get(self, request):
         form = AddWorkoutForm()
@@ -111,7 +135,7 @@ class EditWorkoutView(View):
         return render(request, 'edit_workout.html', {'form': form})
 
     def post(self, request, workout_id):
-        workout = get_object_or_404(SplitModel, id=workout_id)
+        workout = get_object_or_404(WorkoutModel, id=workout_id)
         form = AddWorkoutForm(request.POST or None, instance=workout)
         if form.is_valid():
             form.save()
@@ -119,3 +143,15 @@ class EditWorkoutView(View):
         else:
             form = AddWorkoutForm(instance=workout)
             return render(request, 'edit_workout.html', {'form': form})
+
+
+class DeleteWorkoutView(View):
+    def get(self, request, workout_id):
+        workout = WorkoutModel.objects.get(id=workout_id)
+        context = {'type': 'workout', 'object': workout}
+        return render(request, 'delete.html', context)
+
+    def post(self, request, workout_id):
+        workout = WorkoutModel.objects.get(id=workout_id)
+        workout.delete()
+        return HttpResponseRedirect(f'/workouts')

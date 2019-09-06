@@ -10,7 +10,7 @@
         <h2>{{ exercise.name }}</h2>
         {{ exercise.description }}<br>
         {{ exercise.reps }}<br>
-        <a href="/exercise/{{ exercise.id }}">Edit/Delete</a>
+        <a href="/exercise/{{ exercise.id }}">Edit</a> <a href="/exercise/{{ exercise.id }}/delete">Delete</a>
     {% endfor %}
     <br><br>
     <a href="/add_exercise">Add exercise</a>

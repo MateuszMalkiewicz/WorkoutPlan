@@ -16,9 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from workout.views import IndexView, \
-    ExercisesView, AddExerciseView, EditExerciseView, \
-    SplitsView, AddSplitView, EditSplitView, \
-    WorkoutsView, AddWorkoutView, EditWorkoutView
+    ExercisesView, AddExerciseView, EditExerciseView, DeleteExerciseView,\
+    SplitsView, AddSplitView, EditSplitView, DeleteSplitView,\
+    WorkoutsView, AddWorkoutView, EditWorkoutView, DeleteWorkoutView
 
 
 urlpatterns = [
@@ -27,10 +27,13 @@ urlpatterns = [
     path('exercises/', ExercisesView.as_view()),
     path('add_exercise/', AddExerciseView.as_view()),
     path('exercise/<int:exercise_id>/', EditExerciseView.as_view()),
+    path('exercise/<int:exercise_id>/delete', DeleteExerciseView.as_view()),
     path('splits/', SplitsView.as_view()),
     path('add_split/', AddSplitView.as_view()),
     path('split/<int:split_id>/', EditSplitView.as_view()),
+    path('split/<int:split_id>/delete', DeleteSplitView.as_view()),
     path('workouts/', WorkoutsView.as_view()),
     path('add_workout/', AddWorkoutView.as_view()),
     path('workout/<int:workout_id>/', EditWorkoutView.as_view()),
+    path('workout/<int:workout_id>/delete', DeleteWorkoutView.as_view()),
 ]
