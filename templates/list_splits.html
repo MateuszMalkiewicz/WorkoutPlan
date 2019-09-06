@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <a href="/">Main page</a>
+    {% for split in splits %}
+        <h3>{{ split.name }}</h3>
+        {{ split.description }}<br>
+        <ul>
+            {% for exercise in split.exercises.all %}
+                <li>{{ exercise.name }} {{ exercise.reps }}</li>
+            {% endfor %}
+        </ul>
+        <a href="/split/{{ split.id }}">Edit</a> <a href="/split/{{ split.id }}/delete">Delete</a>
+    {% endfor %}
+    <br><br>
+    <a href="/add_split">Add split</a>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="/">Main page</a>
+    {% for workout in workouts %}
+        <h3>{{ workout.name }}</h3>
+        {{ workout.description }}<br>
+        <ul>
+            {% for split in workout.splits.all %}
+                <li>{{ split.name }}</li>
+            {% endfor %}
+        </ul>
+        <a href="/workout/{{ workout.id }}">Edit</a> <a href="/workout/{{ workout.id }}/delete">Delete</a>
+    {% endfor %}
+    <br><br>
+    <a href="/add_workout">Add workout</a>
+</body>
+</html>
