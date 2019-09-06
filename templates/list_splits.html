@@ -5,9 +5,9 @@
     <title>Title</title>
 </head>
 <body>
-    <a href="/">Strona główna</a>
+    <a href="/">Main page</a>
     {% for split in splits %}
-        <h2>{{ split.name }}</h2>
+        <h3>{{ split.name }}</h3>
         {{ split.description }}<br>
         <ul>
             {% for exercise in split.exercises.all %}
