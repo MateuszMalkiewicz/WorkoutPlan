@@ -10,7 +10,7 @@ REPS = {
 
 class ExerciseModel(models.Model):
     name = models.CharField(max_length=128)
-    description = models.TextField()
+    description = models.TextField(null=True)
     reps = models.CharField(choices=REPS, max_length=4)
 
     def __str__(self):

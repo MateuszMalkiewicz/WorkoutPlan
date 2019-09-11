@@ -12,7 +12,7 @@ class IndexView(View):
 
 class ExercisesView(View):
     def get(self, request):
-        return render(request, 'list_exercises.html', {'exercises': ExerciseModel.objects.all()})
+        return render(request, 'list_exercises.html', {'exercises': ExerciseModel.objects.all().order_by('id')})
 
 
 class SplitsView(View):
