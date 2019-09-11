@@ -17,8 +17,8 @@ from django.contrib import admin
 from django.urls import path
 from workout.views import IndexView, \
     ExercisesView, AddExerciseView, EditExerciseView, DeleteExerciseView,\
-    SplitsView, AddSplitView, EditSplitView, DeleteSplitView,\
-    WorkoutsView, AddWorkoutView, EditWorkoutView, DeleteWorkoutView
+    SplitsView, AddSplitView, EditSplitView, DeleteSplitView, StartSplitView, \
+    WorkoutsView, AddWorkoutView, EditWorkoutView, DeleteWorkoutView, StartWorkoutView
 
 
 urlpatterns = [
@@ -36,4 +36,6 @@ urlpatterns = [
     path('add_workout/', AddWorkoutView.as_view()),
     path('workout/<int:workout_id>/', EditWorkoutView.as_view()),
     path('workout/<int:workout_id>/delete', DeleteWorkoutView.as_view()),
+    path('workout/<int:workout_id>/start', StartWorkoutView.as_view()),
+    path('workout/<int:workout_id>/start/<int:split_id>', StartSplitView.as_view())
 ]

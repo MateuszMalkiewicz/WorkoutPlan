@@ -14,7 +14,8 @@
                 <li>{{ split.name }}</li>
             {% endfor %}
         </ul>
-        <a href="/workout/{{ workout.id }}">Edit</a> <a href="/workout/{{ workout.id }}/delete">Delete</a>
+        <a href="/workout/{{ workout.id }}">Edit</a> <a href="/workout/{{ workout.id }}/delete">Delete</a> <br>
+        <a href="/workout/{{ workout.id }}/start">Start workout</a>
     {% endfor %}
     <br><br>
     <a href="/add_workout">Add workout</a>

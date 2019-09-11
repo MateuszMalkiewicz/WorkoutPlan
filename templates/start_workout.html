@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>{{ workout.name }}</h1>
+    <p>{{ workout.description }}</p>
+    <ul>
+    {% for split in workout.splits.all %}
+        <li>
+            <a href="/workout/{{ workout.id }}/start/{{ split.id }}">Start {{ split.name }}</a>
+        </li>
+    {% endfor %}
+    </ul>
+    <br><br>
+    <a href="/workouts">Workout list</a>
+</body>
+</html>
