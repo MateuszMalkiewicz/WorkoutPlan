@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-<a href="/">Main page</a>
+<a href="{% url 'index' %}">Main page</a>
     {% for workout in workouts %}
         <h3>{{ workout.name }}</h3>
         {{ workout.description }}<br>
@@ -14,10 +14,10 @@
                 <li>{{ split.name }}</li>
             {% endfor %}
         </ul>
-        <a href="/workout/{{ workout.id }}">Edit</a> <a href="/workout/{{ workout.id }}/delete">Delete</a> <br>
-        <a href="/workout/{{ workout.id }}/start">Start workout</a>
+        <a href="{% url 'edit_workout' workout.id %}">Edit</a> <a href="{% url 'delete_workout' workout.id %}">Delete</a> <br>
+        <a href="{% url 'start_workout' workout.id %}">Start workout</a>
     {% endfor %}
     <br><br>
-    <a href="/add_workout">Add workout</a>
+    <a href="{% url 'add_workout' %}">Add workout</a>
 </body>
 </html>

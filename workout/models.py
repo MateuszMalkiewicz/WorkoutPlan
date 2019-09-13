@@ -14,6 +14,8 @@ class ExerciseModel(models.Model):
     reps = models.CharField(choices=REPS, max_length=4)
 
     def __str__(self):
+
+
         return self.name + ' ' + self.reps
 
 
@@ -34,3 +36,9 @@ class WorkoutModel(models.Model):
     def __str__(self):
         return self.name
 
+
+class LoadModel(models.Model):
+    weight = models.FloatField()
+    exercise = models.ForeignKey(ExerciseModel, on_delete=models.DO_NOTHING)
+    split = models.ForeignKey(SplitModel, on_delete=models.DO_NOTHING)
+    workout = models.ForeignKey(WorkoutModel, on_delete=models.DO_NOTHING)
