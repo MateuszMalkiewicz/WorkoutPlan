@@ -110,7 +110,7 @@ class DeleteSplitView(View):
     def post(self, request, split_id):
         split = SplitModel.objects.get(id=split_id)
         split.delete()
-        return HttpResponseRedirect(f'/splits')
+        return HttpResponseRedirect('/splits')
 
 
 class StartSplitView(View):
@@ -164,7 +164,7 @@ class DeleteWorkoutView(View):
     def post(self, request, workout_id):
         workout = WorkoutModel.objects.get(id=workout_id)
         workout.delete()
-        return HttpResponseRedirect(f'/workouts')
+        return HttpResponseRedirect('/workouts')
 
 
 class StartWorkoutView(View):

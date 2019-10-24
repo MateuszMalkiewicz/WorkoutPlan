@@ -14,8 +14,6 @@ class ExerciseModel(models.Model):
     reps = models.CharField(choices=REPS, max_length=4)
 
     def __str__(self):
-
-
         return self.name + ' ' + self.reps
 
 
