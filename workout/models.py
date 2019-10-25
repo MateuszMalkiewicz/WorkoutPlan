@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 REPS = {
@@ -12,6 +13,7 @@ class ExerciseModel(models.Model):
     name = models.CharField(max_length=128)
     description = models.TextField(null=True)
     reps = models.CharField(choices=REPS, max_length=4)
+    user = models.ForeignKey(User, null=True, default=None, on_delete=models.DO_NOTHING)
 
     def __str__(self):
         return self.name + ' ' + self.reps
@@ -40,3 +42,4 @@ class LoadModel(models.Model):
     exercise = models.ForeignKey(ExerciseModel, on_delete=models.DO_NOTHING)
     split = models.ForeignKey(SplitModel, on_delete=models.DO_NOTHING)
     workout = models.ForeignKey(WorkoutModel, on_delete=models.DO_NOTHING)
+

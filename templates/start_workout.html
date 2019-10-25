@@ -1,10 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block content %}
     <h1>{{ workout.name }}</h1>
     <p>{{ workout.description }}</p>
     <ul>
@@ -16,5 +11,4 @@
     </ul>
     <br><br>
     <a href="{% url 'workouts' %}">Workout list</a>
-</body>
-</html>
+{% endblock %}

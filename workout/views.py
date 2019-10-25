@@ -140,7 +140,7 @@ class AddWorkoutView(View):
 
 class EditWorkoutView(View):
     def get(self, request, workout_id):
-        workout = WorkoutModel.objects.get(id=workout_id)
+        workout = get_object_or_404(WorkoutModel, id=workout_id)
         form = AddWorkoutForm(instance=workout)
         return render(request, 'edit_workout.html', {'form': form})
 
@@ -171,3 +171,19 @@ class StartWorkoutView(View):
     def get(self, request, workout_id):
         workout = WorkoutModel.objects.get(id=workout_id)
         return render(request, 'start_workout.html', {'workout': workout})
+
+
+class RegisterView(View):
+    def get(self, request):
+        pass
+
+    def post(self, request):
+        pass
+
+
+class LoginView(View):
+    def get(self, request):
+        pass
+
+    def post(self, request):
+        pass
