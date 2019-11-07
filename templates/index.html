@@ -1,8 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
-    <h1>Create your Workout!</h1>
+    <div class="container-fluid">
+        <h1>Create your Workout!</h1>
         <a href="{% url 'exercises' %}">Exercises</a><br>
         <a href="{% url 'splits' %}">Splits</a><br>
         <a href="{% url 'workouts' %}">Workouts</a><br>
         <br>
+    </div>
 {% endblock %}

@@ -18,7 +18,8 @@ from django.urls import path
 from workout.views import IndexView, \
     ExercisesView, AddExerciseView, EditExerciseView, DeleteExerciseView,\
     SplitsView, AddSplitView, EditSplitView, DeleteSplitView, StartSplitView, \
-    WorkoutsView, AddWorkoutView, EditWorkoutView, DeleteWorkoutView, StartWorkoutView
+    WorkoutsView, AddWorkoutView, EditWorkoutView, DeleteWorkoutView, StartWorkoutView, \
+    RegisterView, LoginView
 
 
 urlpatterns = [
@@ -38,4 +39,6 @@ urlpatterns = [
     path('workout/<int:workout_id>/delete', DeleteWorkoutView.as_view(), name='delete_workout'),
     path('workout/<int:workout_id>/start', StartWorkoutView.as_view(), name='start_workout'),
     path('workout/<int:workout_id>/start/<int:split_id>', StartSplitView.as_view(), name='start_split'),
+    path('register/', RegisterView.as_view(), name='register'),
+    path('login/', LoginView.as_view(), name='login'),
 ]
