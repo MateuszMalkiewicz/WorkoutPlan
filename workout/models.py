@@ -2,17 +2,10 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-REPS = {
-    ('5x5', '5x5'),
-    ('3x8', '3x8'),
-    ('1x5', '1x5')
-}
-
-
 class ExerciseModel(models.Model):
     name = models.CharField(max_length=128)
     description = models.TextField(null=True)
-    reps = models.CharField(choices=REPS, max_length=4)
+    reps = models.CharField(max_length=5)
     user = models.ForeignKey(User, null=True, default=None, on_delete=models.DO_NOTHING)
 
     def __str__(self):

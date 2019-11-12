@@ -1,8 +1,6 @@
 {% extends "base.html" %}
+
 {% block content %}
-
-    <a href="{% url 'index' %}">Main page</a>
-
     {% for workout in workouts %}
         <h3>{{ workout.name }}</h3>
         {{ workout.description }}<br>

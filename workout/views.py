@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.views import View
 from django.http.response import HttpResponseRedirect
-from workout.forms import AddExerciseForm, AddSplitForm, AddWorkoutForm
+from workout.forms import AddExerciseForm, AddSplitForm, AddWorkoutForm, RegisterForm
 from workout.models import ExerciseModel, SplitModel, WorkoutModel
 
 
@@ -12,17 +12,20 @@ class IndexView(View):
 
 class ExercisesView(View):
     def get(self, request):
-        return render(request, 'list_exercises.html', {'exercises': ExerciseModel.objects.all().order_by('id')})
+        exercises = ExerciseModel.objects.all().order_by('id')
+        return render(request, 'list_exercises.html', {'exercises': exercises})
 
 
 class SplitsView(View):
     def get(self, request):
-        return render(request, 'list_splits.html', {'splits': SplitModel.objects.all()})
+        splits = SplitModel.objects.all()
+        return render(request, 'list_splits.html', {'splits': splits})
 
 
 class WorkoutsView(View):
     def get(self, request):
-        return render(request, 'list_workouts.html', {'workouts': WorkoutModel.objects.all()})
+        workouts = WorkoutModel.objects.all()
+        return render(request, 'list_workouts.html', {'workouts': workouts})
 
 
 class AddExerciseView(View):
@@ -42,7 +45,7 @@ class AddExerciseView(View):
 
 class EditExerciseView(View):
     def get(self, request, exercise_id):
-        exercise = ExerciseModel.objects.get(id=exercise_id)
+        exercise = get_object_or_404(ExerciseModel, id=exercise_id)
         form = AddExerciseForm(instance=exercise)
         return render(request, 'edit_exercise.html', {'form': form})
 
@@ -59,12 +62,12 @@ class EditExerciseView(View):
 
 class DeleteExerciseView(View):
     def get(self, request, exercise_id):
-        exercise = ExerciseModel.objects.get(id=exercise_id)
+        exercise = get_object_or_404(ExerciseModel, id=exercise_id)
         context = {'type': 'exercise', 'object': exercise}
         return render(request, 'delete.html', context)
 
     def post(self, request, exercise_id):
-        exercise = ExerciseModel.objects.get(id=exercise_id)
+        exercise = get_object_or_404(ExerciseModel, id=exercise_id)
         exercise.delete()
         return HttpResponseRedirect(f'/exercises')
 
@@ -86,7 +89,7 @@ class AddSplitView(View):
 
 class EditSplitView(View):
     def get(self, request, split_id):
-        split = SplitModel.objects.get(id=split_id)
+        split = get_object_or_404(SplitModel, id=split_id)
         form = AddSplitForm(instance=split)
         return render(request, 'edit_split.html', {'form': form})
 
@@ -103,20 +106,20 @@ class EditSplitView(View):
 
 class DeleteSplitView(View):
     def get(self, request, split_id):
-        split = SplitModel.objects.get(id=split_id)
+        split = get_object_or_404(SplitModel, id=split_id)
         context = {'type': 'split', 'object': split}
         return render(request, 'delete.html', context)
 
     def post(self, request, split_id):
-        split = SplitModel.objects.get(id=split_id)
+        split = get_object_or_404(SplitModel, id=split_id)
         split.delete()
         return HttpResponseRedirect('/splits')
 
 
 class StartSplitView(View):
     def get(self, request, workout_id, split_id):
-        workout = WorkoutModel.objects.get(id=workout_id)
-        split = SplitModel.objects.get(id=split_id)
+        workout = get_object_or_404(WorkoutModel, id=workout_id)
+        split = get_object_or_404(SplitModel, id=split_id)
         return render(request, 'start_split.html')
 
     def post(self, request, workout_id, split_id):
@@ -157,25 +160,34 @@ class EditWorkoutView(View):
 
 class DeleteWorkoutView(View):
     def get(self, request, workout_id):
-        workout = WorkoutModel.objects.get(id=workout_id)
+        workout = get_object_or_404(WorkoutModel, id=workout_id)
         context = {'type': 'workout', 'object': workout}
         return render(request, 'delete.html', context)
 
     def post(self, request, workout_id):
-        workout = WorkoutModel.objects.get(id=workout_id)
+        workout = get_object_or_404(WorkoutModel, id=workout_id)
         workout.delete()
         return HttpResponseRedirect('/workouts')
 
 
 class StartWorkoutView(View):
     def get(self, request, workout_id):
-        workout = WorkoutModel.objects.get(id=workout_id)
+        workout = get_object_or_404(WorkoutModel, id=workout_id)
         return render(request, 'start_workout.html', {'workout': workout})
 
 
 class RegisterView(View):
+
+    def verify_user_data(self, *args):
+        is_valid = True
+        for form_field in args:
+            if form_field is None or len(form_field) == 0:
+                is_valid = False
+        return is_valid
+
     def get(self, request):
-        pass
+        form = RegisterForm
+        return render(request, 'user_registration.html', {'form': form})
 
     def post(self, request):
         pass

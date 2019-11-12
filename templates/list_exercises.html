@@ -1,6 +1,6 @@
 {% extends "base.html" %}
+
 {% block content %}
-    <a href="{% url 'index' %}">Main page</a>
     {% for exercise in exercises %}
         <h3>{{ exercise.name }}</h3>
         {{ exercise.description }}<br>
