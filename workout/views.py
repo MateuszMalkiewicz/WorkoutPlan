@@ -3,6 +3,7 @@ from django.views import View
 from django.http.response import HttpResponseRedirect
 from workout.forms import AddExerciseForm, AddSplitForm, AddWorkoutForm, RegisterForm
 from workout.models import ExerciseModel, SplitModel, WorkoutModel
+from django.contrib.auth.models import User
 
 
 class IndexView(View):
@@ -177,21 +178,27 @@ class StartWorkoutView(View):
 
 
 class RegisterView(View):
-
-    def verify_user_data(self, *args):
-        is_valid = True
-        for form_field in args:
-            if form_field is None or len(form_field) == 0:
-                is_valid = False
-        return is_valid
+    def validate_passwords(self, password_one, password_two):
+        if len(password_one) < 8:
+            return False
+        return True if password_one == password_two else False
 
     def get(self, request):
         form = RegisterForm
         return render(request, 'user_registration.html', {'form': form})
 
     def post(self, request):
-        pass
+        username = request.POST['username']
+        email = request.POST['email']
+        password_one = request.POST['password1']
+        password_two = request.POST['password2']
 
+        if self.validate_passwords(password_one, password_two):
+            User.objects.create_user(username=username, email=email, password=password_one)
+            return render(request, 'user_registration_success.html')
+
+        form = RegisterForm
+        return render(request, 'user_registration.html', {'invalid_password': True, 'form': form})
 
 class LoginView(View):
     def get(self, request):
