@@ -1,9 +1,9 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
-from django.http.response import HttpResponseRedirect
-from workout.forms import AddExerciseForm, AddSplitForm, AddWorkoutForm, RegisterForm
+from workout.forms import AddExerciseForm, AddSplitForm, AddWorkoutForm, RegisterForm, LoginForm
 from workout.models import ExerciseModel, SplitModel, WorkoutModel
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
 
 
 class IndexView(View):
@@ -38,7 +38,7 @@ class AddExerciseView(View):
         form = AddExerciseForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/exercises')
+            return redirect('/exercises')
         else:
             form = AddExerciseForm()
             return render(request, 'add_exercise.html', {'form': form})
@@ -55,7 +55,7 @@ class EditExerciseView(View):
         form = AddExerciseForm(request.POST or None, instance=exercise)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/exercises')
+            return redirect('/exercises')
         else:
             form = AddExerciseForm(instance=exercise)
             return render(request, 'edit_exercise.html', {'form': form})
@@ -70,7 +70,7 @@ class DeleteExerciseView(View):
     def post(self, request, exercise_id):
         exercise = get_object_or_404(ExerciseModel, id=exercise_id)
         exercise.delete()
-        return HttpResponseRedirect(f'/exercises')
+        return redirect('/exercises')
 
 
 class AddSplitView(View):
@@ -82,7 +82,7 @@ class AddSplitView(View):
         form = AddSplitForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/splits')
+            return redirect('/splits')
         else:
             form = AddSplitForm()
             return render(request, 'add_split.html', {'form': form})
@@ -99,7 +99,7 @@ class EditSplitView(View):
         form = AddSplitForm(request.POST or None, instance=split)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/splits')
+            return redirect('/splits')
         else:
             form = AddSplitForm(instance=split)
             return render(request, 'edit_split.html', {'form': form})
@@ -114,7 +114,7 @@ class DeleteSplitView(View):
     def post(self, request, split_id):
         split = get_object_or_404(SplitModel, id=split_id)
         split.delete()
-        return HttpResponseRedirect('/splits')
+        return redirect('/splits')
 
 
 class StartSplitView(View):
@@ -136,7 +136,7 @@ class AddWorkoutView(View):
         form = AddWorkoutForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/workouts')
+            return redirect('/workouts')
         else:
             form = AddWorkoutForm()
             return render(request, 'add_workout.html', {'form': form})
@@ -153,7 +153,7 @@ class EditWorkoutView(View):
         form = AddWorkoutForm(request.POST or None, instance=workout)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/workouts')
+            return redirect('/workouts')
         else:
             form = AddWorkoutForm(instance=workout)
             return render(request, 'edit_workout.html', {'form': form})
@@ -168,7 +168,7 @@ class DeleteWorkoutView(View):
     def post(self, request, workout_id):
         workout = get_object_or_404(WorkoutModel, id=workout_id)
         workout.delete()
-        return HttpResponseRedirect('/workouts')
+        return redirect('/workouts')
 
 
 class StartWorkoutView(View):
@@ -178,14 +178,15 @@ class StartWorkoutView(View):
 
 
 class RegisterView(View):
+    form = RegisterForm
+
     def validate_passwords(self, password_one, password_two):
         if len(password_one) < 8:
             return False
         return True if password_one == password_two else False
 
     def get(self, request):
-        form = RegisterForm
-        return render(request, 'user_registration.html', {'form': form})
+        return render(request, 'user_registration.html', {'form': self.form})
 
     def post(self, request):
         username = request.POST['username']
@@ -197,12 +198,22 @@ class RegisterView(View):
             User.objects.create_user(username=username, email=email, password=password_one)
             return render(request, 'user_registration_success.html')
 
-        form = RegisterForm
-        return render(request, 'user_registration.html', {'invalid_password': True, 'form': form})
+        return render(request, 'user_registration.html', {'invalid_password': True, 'form': self.form})
+
 
 class LoginView(View):
+    form = LoginForm
+
     def get(self, request):
-        pass
+        return render(request, 'user_login.html', {'form': self.form})
 
     def post(self, request):
-        pass
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect('/')
+        else:
+            return render(request, 'user_login.html', {'form': self.form, 'invalid_login_or_password': True})

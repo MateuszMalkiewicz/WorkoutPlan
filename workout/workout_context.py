@@ -1,2 +1,3 @@
 def user_context(request):
-    return {'user': request.user}
+    context = {'user': request.user}
+    return context

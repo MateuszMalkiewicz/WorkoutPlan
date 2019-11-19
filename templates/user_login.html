@@ -1,6 +1,18 @@
 {% extends "base.html" %}
-
+{% load crispy_forms_tags %}
 
 {% block content %}
-
+    <h2>Login</h2>
+    {% if invalid_login_or_password %}
+        <br>
+        <div class="container-fluid font-weight-bold text-center text-danger">
+            Wrong login/password!
+        </div>
+        <br>
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-outline-primary btn-lg btn-block">Login</button>
+    </form>
 {% endblock %}
