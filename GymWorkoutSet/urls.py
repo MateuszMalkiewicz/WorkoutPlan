@@ -19,7 +19,7 @@ from workout.views import IndexView, \
     ExercisesView, AddExerciseView, EditExerciseView, DeleteExerciseView,\
     SplitsView, AddSplitView, EditSplitView, DeleteSplitView, StartSplitView, \
     WorkoutsView, AddWorkoutView, EditWorkoutView, DeleteWorkoutView, StartWorkoutView, \
-    RegisterView, LoginView
+    RegisterView, LoginView, LogoutView
 
 
 urlpatterns = [
@@ -41,4 +41,5 @@ urlpatterns = [
     path('workout/<int:workout_id>/start/<int:split_id>', StartSplitView.as_view(), name='start_split'),
     path('register/', RegisterView.as_view(), name='register'),
     path('login/', LoginView.as_view(), name='login'),
+    path('logout/', LogoutView.as_view(), name='logout'),
 ]

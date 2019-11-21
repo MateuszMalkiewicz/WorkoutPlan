@@ -217,3 +217,9 @@ class LoginView(View):
             return redirect('/')
         else:
             return render(request, 'user_login.html', {'form': self.form, 'invalid_login_or_password': True})
+
+
+class LogoutView(View):
+    def get(self, request):
+        logout(request)
+        return redirect('/')
