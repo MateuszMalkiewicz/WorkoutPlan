@@ -5,11 +5,12 @@ from django.contrib.auth.models import User
 class ExerciseModel(models.Model):
     name = models.CharField(max_length=128)
     description = models.TextField(null=True)
-    reps = models.CharField(max_length=5)
+    sets = models.IntegerField(null=True)
+    reps = models.IntegerField(null=True)
     user = models.ForeignKey(User, null=True, default=None, on_delete=models.DO_NOTHING)
 
     def __str__(self):
-        return self.name + ' ' + self.reps
+        return self.name + ' ' + str(self.sets) + 'x' + str(self.reps)
 
 
 class SplitModel(models.Model):
