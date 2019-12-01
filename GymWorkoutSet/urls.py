@@ -17,23 +17,29 @@ from django.contrib import admin
 from django.urls import path
 from workout.views import IndexView, \
     ExercisesView, AddExerciseView, EditExerciseView, DeleteExerciseView,\
-    SplitsView, AddSplitView, EditSplitView, DeleteSplitView,\
-    WorkoutsView, AddWorkoutView, EditWorkoutView, DeleteWorkoutView
+    SplitsView, AddSplitView, EditSplitView, DeleteSplitView, StartSplitView, \
+    WorkoutsView, AddWorkoutView, EditWorkoutView, DeleteWorkoutView, StartWorkoutView, \
+    RegisterView, LoginView, LogoutView
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', IndexView.as_view()),
-    path('exercises/', ExercisesView.as_view()),
-    path('add_exercise/', AddExerciseView.as_view()),
-    path('exercise/<int:exercise_id>/', EditExerciseView.as_view()),
-    path('exercise/<int:exercise_id>/delete', DeleteExerciseView.as_view()),
-    path('splits/', SplitsView.as_view()),
-    path('add_split/', AddSplitView.as_view()),
-    path('split/<int:split_id>/', EditSplitView.as_view()),
-    path('split/<int:split_id>/delete', DeleteSplitView.as_view()),
-    path('workouts/', WorkoutsView.as_view()),
-    path('add_workout/', AddWorkoutView.as_view()),
-    path('workout/<int:workout_id>/', EditWorkoutView.as_view()),
-    path('workout/<int:workout_id>/delete', DeleteWorkoutView.as_view()),
+    path('', IndexView.as_view(), name='index'),
+    path('exercises/', ExercisesView.as_view(), name='exercises'),
+    path('add_exercise/', AddExerciseView.as_view(), name='add_exercise'),
+    path('exercise/<int:exercise_id>/', EditExerciseView.as_view(), name='edit_exercise'),
+    path('exercise/<int:exercise_id>/delete', DeleteExerciseView.as_view(), name='delete_exercise'),
+    path('splits/', SplitsView.as_view(), name='splits'),
+    path('add_split/', AddSplitView.as_view(), name='add_split'),
+    path('split/<int:split_id>/', EditSplitView.as_view(), name='edit_split'),
+    path('split/<int:split_id>/delete', DeleteSplitView.as_view(), name='delete_split'),
+    path('workouts/', WorkoutsView.as_view(), name='workouts'),
+    path('add_workout/', AddWorkoutView.as_view(), name='add_workout'),
+    path('workout/<int:workout_id>/', EditWorkoutView.as_view(), name='edit_workout'),
+    path('workout/<int:workout_id>/delete', DeleteWorkoutView.as_view(), name='delete_workout'),
+    path('workout/<int:workout_id>/start', StartWorkoutView.as_view(), name='start_workout'),
+    path('workout/<int:workout_id>/start/<int:split_id>', StartSplitView.as_view(), name='start_split'),
+    path('register/', RegisterView.as_view(), name='register'),
+    path('login/', LoginView.as_view(), name='login'),
+    path('logout/', LogoutView.as_view(), name='logout'),
 ]

@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<a href="/">Main page</a>
+{% extends "base.html" %}
+
+{% block content %}
     {% for workout in workouts %}
         <h3>{{ workout.name }}</h3>
         {{ workout.description }}<br>
@@ -14,9 +9,10 @@
                 <li>{{ split.name }}</li>
             {% endfor %}
         </ul>
-        <a href="/workout/{{ workout.id }}">Edit</a> <a href="/workout/{{ workout.id }}/delete">Delete</a>
+        <a href="{% url 'edit_workout' workout.id %}">Edit</a> <a href="{% url 'delete_workout' workout.id %}">Delete</a> <br>
+        <a href="{% url 'start_workout' workout.id %}">Start workout</a>
     {% endfor %}
+
     <br><br>
-    <a href="/add_workout">Add workout</a>
-</body>
-</html>
+    <a href="{% url 'add_workout' %}">Add workout</a>
+{% endblock %}

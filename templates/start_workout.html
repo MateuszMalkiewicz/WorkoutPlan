@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>{{ workout.name }}</h1>
+    <p>{{ workout.description }}</p>
+    <ul>
+    {% for split in workout.splits.all %}
+        <li>
+            <a href="{% url 'start_split' workout.id split.id %}">Start {{ split.name }}</a>
+        </li>
+    {% endfor %}
+    </ul>
+    <br><br>
+    <a href="{% url 'workouts' %}">Workout list</a>
+{% endblock %}

@@ -1,18 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <a href="/">Main page</a>
+{% extends "base.html" %}
+
+{% block content %}
     {% for exercise in exercises %}
         <h3>{{ exercise.name }}</h3>
         {{ exercise.description }}<br>
         {{ exercise.reps }}<br>
-        <a href="/exercise/{{ exercise.id }}">Edit</a> <a href="/exercise/{{ exercise.id }}/delete">Delete</a>
+        <a href="{% url 'edit_exercise' exercise.id %}">Edit</a> <a href="{% url 'delete_exercise' exercise.id %}">Delete</a>
     {% endfor %}
     <br><br>
-    <a href="/add_exercise">Add exercise</a>
-</body>
-</html>
+    <a href="{% url 'add_exercise' %}">Add exercise</a>
+{% endblock %}

@@ -1,3 +1,5 @@
 from django.contrib import admin
+from workout.models import ExerciseModel, SplitModel, WorkoutModel, LoadModel
 
-# Register your models here.
+
+admin.site.register(ExerciseModel)
