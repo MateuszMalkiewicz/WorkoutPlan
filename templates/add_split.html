@@ -4,10 +4,26 @@
 {% block content %}
     <form method="POST">
         {% csrf_token %}
-        <table>
-            {{ form|crispy }}
-        </table>
+        <div class="form-row justify-content-center">
+            <div class="form-group col-lg-5 col-md-8 col-sm-12 mb-0">
+                {{ form.name|as_crispy_field }}
+            </div>
+        </div>
+        <div class="form-row justify-content-center">
+            <div class="form-group col-lg-5 col-md-8 col-xs-4 mb-0 overflow">
+                {{ form.exercises|as_crispy_field }}
+            </div>
+        </div>
+        <div class="form-row justify-content-center">
+            <div class="form-group col-lg-5 col-md-8 col-sm-12 mb-0">
+                {{ form.description|as_crispy_field }}
+            </div>
+        </div>
         <br>
-        <button type="submit">Dodaj</button>
+        <div class="row justify-content-center">
+            <button class="btn btn-outline-primary btn-lg btn-block col-lg-5 col-md-8 col-sm-12 mb-0" type="submit">
+                Add split
+            </button>
+        </div>
     </form>
 {% endblock %}
