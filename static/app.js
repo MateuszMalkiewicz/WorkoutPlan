@@ -13,4 +13,5 @@ $(function(){
     addWorkoutButton.click(function () {
         location.href = "/add_workout/";
     });
+
 });
