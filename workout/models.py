@@ -7,7 +7,8 @@ class ExerciseModel(models.Model):
     description = models.TextField(null=True)
     sets = models.IntegerField(null=True)
     reps = models.IntegerField(null=True)
-    user = models.ForeignKey(User, null=True, default=None, on_delete=models.DO_NOTHING)
+    initial_load = models.FloatField(null=True)
+    progression = models.FloatField(default=0, null=True)
 
     def __str__(self):
         if self.sets is not None:
@@ -32,11 +33,3 @@ class WorkoutModel(models.Model):
 
     def __str__(self):
         return self.name
-
-
-class LoadModel(models.Model):
-    weight = models.FloatField()
-    exercise = models.ForeignKey(ExerciseModel, on_delete=models.DO_NOTHING)
-    split = models.ForeignKey(SplitModel, on_delete=models.DO_NOTHING)
-    workout = models.ForeignKey(WorkoutModel, on_delete=models.DO_NOTHING)
-

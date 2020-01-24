@@ -1,16 +1,16 @@
 $(function(){
-    let addExerciseButton = $("#add-exercise-button");
-    addExerciseButton.click(function () {
+    let newExerciseButton = $("#new-exercise-button");
+    newExerciseButton.click(function () {
         location.href = "/add_exercise/";
     });
 
-    let addSplitButton = $("#add-split-button");
-    addSplitButton.click(function () {
+    let newSplitButton = $("#new-split-button");
+    newSplitButton.click(function () {
         location.href = "/add_split/";
     });
 
-    let addWorkoutButton = $("#add-workout-button");
-    addWorkoutButton.click(function () {
+    let newWorkoutButton = $("#new-workout-button");
+    newWorkoutButton.click(function () {
         location.href = "/add_workout/";
     });
 

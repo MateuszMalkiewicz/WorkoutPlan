@@ -12,6 +12,7 @@ class AddExerciseForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(AddExerciseForm, self).__init__(*args, **kwargs)
         self.fields['description'].required = False
+        self.fields['progression'].required = False
 
 
 class AddSplitForm(forms.ModelForm):
