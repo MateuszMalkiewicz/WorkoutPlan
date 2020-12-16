@@ -121,7 +121,11 @@ class StartSplitView(View):
     def get(self, request, workout_id, split_id):
         workout = get_object_or_404(WorkoutModel, id=workout_id)
         split = get_object_or_404(SplitModel, id=split_id)
-        return render(request, 'start_split.html')
+        user = request.user
+
+        context = {'workout': workout, 'split': split, 'user': user}
+
+        return render(request, 'start_split.html', context)
 
     def post(self, request, workout_id, split_id):
         pass
